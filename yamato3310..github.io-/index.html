@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <p id="tmp">hogehoge</p>
+  </div>
+  <script>
+    // - [ ] https://dev.to/li/how-to-requestpermission-for-devicemotion-and-deviceorientation-events-in-ios-13-46g2
+    // - [ ] https://developer.mozilla.org/ja/docs/Web/API/DeviceMotionEvent
+    // - [ ] https://triple-underscore.github.io/deviceorientation-ja.html
+    const handleDeviseMotion = ( e ) => {
+      const { x, y, z } = e.acceleration;
+      if ( x > 10 || y > 10 || z > 10 ) {
+        console.log( '!' );
+      }
+    }
+    const onClick = () => {
+      console.log( 'clicked' );
+      // feature detect
+      if ( typeof DeviceMotionEvent.requestPermission === 'function' ) {
+        DeviceMotionEvent.requestPermission()
+          .then( permissionState => {
+            if ( permissionState === 'granted' ) {
+              window.addEventListener( 'devicemotion', handleDeviseMotion );
+            }
+          } )
+          .catch( console.error );
+      } else {
+        // handle regular non iOS 13+ devices
+      }
+    }
+    document.querySelector( '#tmp' ).addEventListener( 'click', onClick )
+  </script>
+</body>
+
+</html>
