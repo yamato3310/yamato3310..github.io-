@@ -21,7 +21,9 @@
       const { x, y, z } = e.acceleration;
       if ( x > 10 || y > 10 || z > 10 ) {
         console.log( '!' );
-        alert("加速度が取れたよ")
+        // alert("加速度が取れたよ")
+        alert(e.acceleration.x)
+        
       }
     }
     const onClick = () => {
