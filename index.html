@@ -26,6 +26,7 @@
     }
     const onClick = () => {
       console.log( 'clicked' );
+      alert("許可")
       // feature detect
       if ( typeof DeviceMotionEvent.requestPermission === 'function' ) {
         DeviceMotionEvent.requestPermission()
